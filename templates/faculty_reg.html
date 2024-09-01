@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>Responsive Registration Form</title>
+  <meta name="viewport" content="width=device-width,
+      initial-scale=1.0" />
+  <link rel="stylesheet" href="{% static 'css/loginstyle.css'%}" />
+  <script type="text/javascript">
+    function fun() {
+        
+        var uname = document.getElementById("uname").value;
+        if (uname == "" || uname == "NULL") {
+            alert("please enter user name");
+            return false;
+        }
+        if (!validateEmail(uname)) {
+            alert("Enter valid email");
+            return false;
+        }
+
+        var pass = document.getElementById("pass").value;
+        if (pass == "" || pass == "NULL") {
+            alert("please enter password");
+            return false;
+        }
+
+
+        var cpass = document.getElementById("cpass").value;
+        if (cpass == "" || cpass == "NULL") {
+            alert("please enter confirm password");
+            return false;
+        }
+        if (pass != cpass) {
+            alert("password and confirm password must be same");
+            return false;
+        }
+
+
+        return true;
+    }
+    function validateEmail(email) {
+      var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return re.test(email);
+    }
+  </script>
+</head>
+
+<body>
+  <section class="container">
+    <div class="login-container">
+      <div class="form-container">
+
+        <h2 class="opacity">Admin Registration</h2>
+        <form method="post">
+          {% csrf_token%}
+          
+          <input type="name" id="fname" name="fname" placeholder="USERNAME(EXVISHNU)" />
+          <input type="email" id="funame" name="funame" placeholder="USERNAME(EX@GMAIL.COM)" />
+          <input type="password" id="fpass" name="fpass" placeholder="PASSWORD" />
+          <input type="text" id="cpass" name="cpass" placeholder="CONFIRM PASSWORD" />
+          <input type="text" id="contact" name="contact" placeholder="91+8005828423" />
+          <select name="branch" id="branch">
+
+            <option value="select">select</option>
+            {% for x in branches %}
+            <option>{{x.bname}}</option>
+            {% endfor %}
+
+          </select>
+          <input type="text" id="subject" name="subject" placeholder="EX:Machine Learning" />
+
+
+          <button name="submit" id="submit" class="opacity" onclick="return fun()">REGISTER</button>
+
+        </form>
+
+        <div class="register-forget opacity">
+          <a href="{% url 'faculty_login'%}">LOGIN HERE</a>
+        </div>
+      </div>
+    </div>
+    <div class="theme-btn-container"></div>
+  </section>
+</body>
+
+</html>
+

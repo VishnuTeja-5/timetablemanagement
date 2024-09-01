@@ -1,0 +1,36 @@
+{% load static %}
+<head>
+    <title>
+        faculty forgot
+    </title>
+    <script type="text/javascript">
+        function fun(){
+            var us=document.getElementById("username").value;
+            if( us == "" || us == "NULL"){
+                alert("please enter user name");
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+<link rel="stylesheet" href="{% static 'css/loginstyle.css'%}">
+    <section class="container">
+        <div class="login-container">
+            <div class="form-container">
+
+                <h1 class="opacity">LOGIN</h1>
+                <form method="post" id="f1">
+                    {% csrf_token%}
+                    <input type="text" id="username" name ="username" placeholder="USERNAME@GMAIL.COM" />
+                    <button name= "submit" id ="submit" class="opacity" onclick="return fun()">SUBMIT</button>
+                    <table align="center" border="0">
+                        <tr>
+                            <td>{{status}}</td>
+                        </tr>
+                    </table>
+                </form>
+                
+        <div class="theme-btn-container"></div>
+    </section>
+</body>

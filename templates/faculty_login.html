@@ -1,0 +1,58 @@
+{% load static %}
+<head>
+    <title>
+        faculty login
+    </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript">
+        function fun(){
+            var us=document.getElementById("username").value;
+            if( us == "" || us == "NULL"){
+                alert("please enter user name");
+                return false;
+            }
+            if (!validateEmail(us)) {
+                alert("Enter valid email");
+                return false;
+            }
+            
+            var pass=document.getElementById("pass").value;
+            if(pass==""){
+                alert("please enter password");
+                return false;
+            }
+            return true;
+        }
+        function validateEmail(email) {
+            var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+          }
+    </script>
+</head>
+<body>
+    <link rel="stylesheet" href="{% static 'css/loginstyle.css'%}">
+        <section class="container">
+            <div class="login-container">
+                <div class="form-container">
+                    <a href="{% url 'timetable_view'%}" style="display: inline-block; width: 30px; height: 30px; line-height: 30px; text-align: center; background-color: #333; border-radius: 50%;"><i class="fa fa-home" style="font-size: 25px; color: #fff;"></i></a>
+                    <h1 class="opacity">FACULTY LOGIN</h1>
+                    <form method="post" id="f1">
+                        {% csrf_token%}
+                        <input type="text" id="username" name ="username" placeholder="USERNAME@GMAIL.COM" />
+                        <input type="password" id="pass" name = "pass" placeholder="PASSWORD" />
+                    
+                        <button name= "submit" id ="submit" class="opacity" onclick="return fun()">SUBMIT</button>
+                        <table align="center" border="0">
+                            <tr>
+                                <td>{{status}}</td>
+                            </tr>
+                        </table>
+                    </form>
+                    <div class="register-forget opacity">
+                        <a href="{% url 'faculty_reg'%}">SIGN UP</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="{% url 'forgot'%}">FORGOT PASSWORD</a>
+                    </div>
+                    
+            <div class="theme-btn-container"></div>
+        </section>
+    </body>
